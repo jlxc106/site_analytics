@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
-
-var logs = mongoose.model('logs', {
+//convert to YEAR_MONTH_LOGS
+// const year_month = moment().format("YYYY_MM")
+var Logs = mongoose.model(`logs`, {
     ip:{
         type: String,
         required: true,
@@ -10,27 +12,30 @@ var logs = mongoose.model('logs', {
     },
     "access date": {
         type: Date,
-        default: null
+        default: 0
     },
     request: {
-        type: String
+        type: String,
+        default: 'error has occured'
     },
     status: {
-        type: Number
+        type: Number,
+        default: 0
     },
     size: {
-        type: Number
+        type: Number,
+        default: 0
     },
     referrer: {
-        type: String
-
+        type: String,
+        default: 'error has occured'
     },
     "user agent":{
-        type: String
-
+        type: String,
+        default: 'error has occured'
     }
 })
 
 
 
-module.exports = {logs};
+module.exports = {Logs};
