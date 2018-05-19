@@ -1,4 +1,3 @@
-var port = process.env.PORT || 3000;
 class Chart_Prototype {
 	constructor() {
 		this.ChartObj = {
@@ -65,7 +64,8 @@ class DailyChart extends Chart_Prototype {
 	get_daily() {
 		$.ajax({
 			type: "GET",
-			url: `http://localhost:${port}/findByDate/${this.today}/${this.category}`,
+			url:`https://calm-anchorage-32075.herokuapp.com/findByDate/${this.today}/${this.category}`,
+			// url: `http://localhost:3000/findByDate/${this.today}/${this.category}`,
 			success: function(response, textStatus, jqXHR) {
 				if (jqXHR.status === 204) {
 					$("#daily-chart-title").html(
@@ -93,9 +93,8 @@ class DailyChart extends Chart_Prototype {
 	backup_daily() {
 		$.ajax({
 			type: "GET",
-			url: `http://localhost:${port}/findByDate/${this.yesterday}/${
-				this.category
-			}`,
+			url:`https://calm-anchorage-32075.herokuapp.com/findByDate/${this.yesterday}/${this.category}`,
+			// url: `http://localhost:3000/findByDate/${this.yesterday}/${this.category}`,
 			success: function(response, textStatus, jqXHR) {
 				if (jqXHR.status === 204) {
 					return console.log("no content");
@@ -160,9 +159,8 @@ class WeeklyChart extends Chart_Prototype {
 	get_weekly() {
 		$.ajax({
 			type: "GET",
-			url: `http://localhost:${port}/findByDates/${this.week_ago}&${
-				this.today
-			}`,
+			url:`https://calm-anchorage-32075.herokuapp.com/findByDates/${this.week_ago}&${this.today}`,
+			// url: `http://localhost:3000/findByDates/${this.week_ago}&${this.today}`,
 			success: function(response) {
 				var i = 0;
 				for (var key in response) {
