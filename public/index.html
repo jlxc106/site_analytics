@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Site Logs | jayclim.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/r-2.2.1/datatables.min.css"
+    />
+    <script src="js/moment.js"></script>
+
+</head>
+
+<body id="bg-img-container">
+    <header>Site Logs for Website:
+        <a href="https://www.jayclim.com" target="_blank">jayclim.com</a>
+    </header>
+    <div class="nav-container">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a href="#chart">Charts</a>
+            </li>
+            <li>
+                <a href="#table">Tables</a>
+            </li>
+        </ul>
+    </div>
+    <div id="chart" class="container">
+        <div class="weekly-chart-container chart-container">
+            <h1>Weekly Requests</h1>
+            <div>
+                <canvas id="weekly_chart" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div id="daily-chart-wrapper" class="daily-chart-container chart-container">
+            <h1 id="daily-chart-title">Daily Requests</h1>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="#daily-chart-wrapper">IP</a>
+                </li>
+                <li class="inactive">
+                    <a href="#daily-chart-wrapper">Status</a>
+                </li>
+            </ul>
+            <div>
+                <canvas id="daily_chart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+    <div id="table" class="container table-container">
+        <h1>Table - Last 7 Days</h1>
+        <table id="myTable" style="width: 80%">
+            <thead>
+                <tr>
+                    <th>Access Date</th>
+                    <th>IP</th>
+                    <th>request</th>
+                    <th>status</th>
+                    <th>size</th>
+                    <th>referrer</th>
+                    <th>user agent</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Access Date</th>
+                    <th>IP</th>
+                    <th>request</th>
+                    <th>status</th>
+                    <th>size</th>
+                    <th>referrer</th>
+                    <th>user agent</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
