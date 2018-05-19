@@ -1,8 +1,12 @@
 # site_analytics
 
+[Live Page](https://calm-anchorage-32075.herokuapp.com)
+
 Web application displaying apache logs for [my porfolio](https://www.jayclim.com) using charts & tables.
 
-[Link](https://www.github.com/jlxc106/site_watch) to server side script to generate daily logs for web access
+[Link](https://www.github.com/jlxc106/site_watch) to server side script to generate daily logs for web access.
+
+Logs are updated everyday at 00:30 AM UTC (5:30 PM PST dst).
 
 ## API
 
