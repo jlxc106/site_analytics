@@ -72,7 +72,7 @@ class DailyChart extends Chart_Prototype {
 						`Daily Requests for ${this.yesterday}`
 					);
 					console.log("backup");
-					return backup_daily(category);
+					return this.backup_daily(this.category);
 				}
 				$("#daily-chart-title").html(`Daily Requests for ${this.today}`);
 				var i = 0;
