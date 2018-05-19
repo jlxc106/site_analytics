@@ -10,7 +10,6 @@ var { mongoose } = require("./db/mongoose");
 var { Logs } = require("./../models/logs");
 const publicPath = path.join(__dirname, "../public");
 const chartPath = path.join(__dirname, "../node_modules/chart.js/dist")
-// var { queryByIP, queryByDates } = require("./utils/helper");
 
 var port = process.env.PORT || 3000;
 const app = express();

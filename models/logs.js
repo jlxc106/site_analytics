@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var moment = require('moment');
 
-//convert to YEAR_MONTH_LOGS
-// const year_month = moment().format("YYYY_MM")
 var Logs = mongoose.model(`logs`, {
     ip:{
         type: String,
@@ -35,7 +33,5 @@ var Logs = mongoose.model(`logs`, {
         default: 'error has occured'
     }
 })
-
-
 
 module.exports = {Logs};

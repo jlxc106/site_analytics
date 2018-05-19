@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/r-2.2.1/datatables.min.css"
     />
     <script src="js/moment.js"></script>
-    <script src="js/script.js"></script>
 
 </head>
 
@@ -50,6 +49,7 @@
             </div>
         </div>
         <div id="daily-chart-wrapper" class="daily-chart-container chart-container">
+            <h1 id="daily-chart-title">Daily Requests</h1>
             <ul class="nav nav-pills">
                 <li class="active">
                     <a href="#daily-chart-wrapper">IP</a>
@@ -58,13 +58,13 @@
                     <a href="#daily-chart-wrapper">Status</a>
                 </li>
             </ul>
-            <h1 id="daily-chart-title">Daily Requests</h1>
             <div>
                 <canvas id="daily_chart" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
     <div id="table" class="container table-container">
+        <h1>Table - Last 7 Days</h1>
         <table id="myTable" style="width: 80%">
             <thead>
                 <tr>
@@ -91,7 +91,7 @@
         </table>
     </div>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-    <script src="js/chart_script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
