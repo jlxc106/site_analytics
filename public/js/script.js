@@ -71,7 +71,6 @@ class DailyChart extends Chart_Prototype {
 					$("#daily-chart-title").html(
 						`Daily Requests for ${this.yesterday}`
 					);
-					console.log("backup");
 					return this.backup_daily(this.category);
 				}
 				$("#daily-chart-title").html(`Daily Requests for ${this.today}`);

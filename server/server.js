@@ -3,13 +3,13 @@ const express = require("express");
 const moment = require("moment");
 const _ = require("lodash");
 const path = require("path");
-const fs = require('fs');
+const fs = require("fs");
 
 //local files
 var { mongoose } = require("./db/mongoose");
 var { Logs } = require("./../models/logs");
 const publicPath = path.join(__dirname, "../public");
-const chartPath = path.join(__dirname, "../node_modules/chart.js/dist")
+const chartPath = path.join(__dirname, "../node_modules/chart.js/dist");
 
 var port = process.env.PORT || 3000;
 const app = express();
@@ -17,61 +17,29 @@ const app = express();
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
-
-app.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
+app.use(function(req, res, next) {
+	res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+	res.setHeader("Access-Control-Allow-Methods", "GET");
+	res.setHeader(
+		"Access-Control-Allow-Headers",
+		"X-Requested-With,content-type"
+	);
+	res.setHeader("Access-Control-Allow-Credentials", true);
+	next();
 });
-
 
 app.use((req, res, next) => {
-    var now = new Date().toString();
-    
-    var log = `${now}: ${req.method} ${req.url}`;
-     console.log(log);
-    fs.appendFile('server.log', log + '\n', (err)=>{
-      if(err){
-        console.log('Unable to append to server.log');
-      }
-    });
-    next();
-  });
-
-//dev purposes only
-app.get("/findByIPAlt/:ip", (req, res) => {
-	const ip_raw = req.params.ip.trim();
-	const ip = ip_raw.split("&");
-	try {
-		Logs.find({
-			ip: { $in: ip }
-		}).then(results => {
-			if (_.isEmpty(results)) {
-				res.status(400).send("Invalid Request");
-			} else {
-				res.send(results);
-			}
-		});
-	} catch (e) {
-		console.log(e);
-		res.status(400).send("Invalid Request");
-	}
+	var now = new Date().toString();
+	var log = `${now}: ${req.method} ${req.url}`;
+	console.log(log);
+	fs.appendFile("server.log", log + "\n", err => {
+		if (err) {
+			console.log("Unable to append to server.log");
+		}
+	});
+	next();
 });
 
-// new way using Promise.all()
 //get all logs by ip address, for multiple requests: separate by &
 app.get("/findByIP/:ip", (req, res) => {
 	const ip_raw = req.params.ip.trim();
@@ -102,12 +70,14 @@ app.get("/findByIP/:ip", (req, res) => {
 
 //organize results from date by ip/network status
 app.get("/findByDate/:date/:category", (req, res) => {
-    const date_raw = req.params.date.trim();
-    const category = req.params.category.trim();
-    const array_of_date = date_raw.split("&");
-	if (!moment(array_of_date[0], "YYYY-MM-DD", true).isValid() || array_of_date.length !== 1 || (!category=="ip" && !category=="status")) {
-        console.log(array_of_date);
-        console.log(typeof category);
+	const date_raw = req.params.date.trim();
+	const category = req.params.category.trim();
+	const array_of_date = date_raw.split("&");
+	if (
+		!moment(array_of_date[0], "YYYY-MM-DD", true).isValid() ||
+		array_of_date.length !== 1 ||
+		(!category == "ip" && !category == "status")
+	) {
 		res.status(400).send("Invalid Request");
 	} else {
 		let resObj = {};
@@ -122,13 +92,12 @@ app.get("/findByDate/:date/:category", (req, res) => {
 							$lt: end_day.toDate()
 						}
 					}).then(result => {
-                        if(_.isEmpty(result)){
-                            res.status(204).send('no content');
-                        }
-                        else{
-                            resolve(result);
-                        }
-                    });
+						if (_.isEmpty(result)) {
+							res.status(204).send("no content");
+						} else {
+							resolve(result);
+						}
+					});
 				} catch (e) {
 					console.log(e);
 					reject(e);
@@ -139,23 +108,20 @@ app.get("/findByDate/:date/:category", (req, res) => {
 		Promise.all(promise)
 			.then(response => {
 				array_of_date.forEach((value, index) => {
-                    resObj[value] = {}; //initialize keys
-                    response[index].forEach((docObj)=>{        
-                        var category_value = docObj[category];
-                        if(!_.hasIn(resObj[value], category_value)){
-                            resObj[value][category_value] = [];
-                        }
-                        resObj[value][category_value].push(docObj);
-                    })
+					resObj[value] = {}; //initialize keys
+					response[index].forEach(docObj => {
+						var category_value = docObj[category];
+						if (!_.hasIn(resObj[value], category_value)) {
+							resObj[value][category_value] = [];
+						}
+						resObj[value][category_value].push(docObj);
+					});
 				});
 				res.send(resObj);
 			})
 			.catch(e => res.status(400).send("Invalid Request"));
 	}
 });
-
-
-
 
 //get all logs by date
 app.get("/findByDate/:date", (req, res) => {
@@ -179,14 +145,13 @@ app.get("/findByDate/:date", (req, res) => {
 							$lt: end_day.toDate()
 						}
 					}).then(result => {
-                        if(_.isEmpty(result)){
-                            res.status(204).send('no content');
-                            // reject('no logs for this date')
-                        }
-                        else{
-                            resolve(result);
-                        }
-                    });
+						if (_.isEmpty(result)) {
+							res.status(204).send("no content");
+							// reject('no logs for this date')
+						} else {
+							resolve(result);
+						}
+					});
 				} catch (e) {
 					console.log(e);
 					reject(e);
@@ -206,11 +171,15 @@ app.get("/findByDate/:date", (req, res) => {
 });
 
 app.get("/findByDates/:date/:category", (req, res) => {
-    const date_raw = req.params.date.trim();
-    const category = req.params.category.trim();
+	const date_raw = req.params.date.trim();
+	const category = req.params.category.trim();
 
 	const array_date = date_raw.split("&");
-	if (!moment(array_date[0], "YYYY-MM-DD", true).isValid() ||!moment(array_date[1], "YYYY-MM-DD", true).isValid() || (!category=="ip" && !category=="status")) {
+	if (
+		!moment(array_date[0], "YYYY-MM-DD", true).isValid() ||
+		!moment(array_date[1], "YYYY-MM-DD", true).isValid() ||
+		(!category == "ip" && !category == "status")
+	) {
 		res.status(400).send("Invalid Request");
 	} else {
 		let resObj = {};
@@ -249,14 +218,14 @@ app.get("/findByDates/:date/:category", (req, res) => {
 				response.forEach((value, index) => {
 					const key = list_of_dates[index].format("YYYY-MM-DD");
 					if (value && !_.isEmpty(value)) {
-                        resObj[key] = {}; //initialize keys
-                        response[index].forEach((docObj)=>{        
-                            var category_value = docObj[category];
-                            if(!_.hasIn(resObj[key], category_value)){
-                                resObj[key][category_value] = [];
-                            }
-                            resObj[key][category_value].push(docObj);
-                        })
+						resObj[key] = {}; //initialize keys
+						response[index].forEach(docObj => {
+							var category_value = docObj[category];
+							if (!_.hasIn(resObj[key], category_value)) {
+								resObj[key][category_value] = [];
+							}
+							resObj[key][category_value].push(docObj);
+						});
 						// resObj[key] = value;
 					}
 				});
