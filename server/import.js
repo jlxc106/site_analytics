@@ -6,7 +6,7 @@ var { mongoose } = require("./db/mongoose");
 const { formatData } = require("./utils/formatData");
 
 const currentDate = moment()
-	.add(1, "days")
+	// .add(1, "days")
 	.format("YYYY-MM-D");
 
 var counter = 0;
