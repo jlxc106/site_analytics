@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "import":"node server/import.js"
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js",
+    "test-watch":"nodemon --exec 'npm test'",
+    "import": "node server/import.js"
   },
-  "engines":{
-    "node":"9.11.1"
+  "engines": {
+    "node": "9.11.1"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +25,7 @@
   },
   "devDependencies": {
     "expect": "^22.4.3",
-    "mocha": "^5.1.1",
+    "mocha": "^5.2.0",
     "nodemon": "^1.17.4",
     "supertest": "^3.1.0"
   }

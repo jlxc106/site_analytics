@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var moment = require('moment');
 
 var Logs = mongoose.model(`logs`, {
     ip:{

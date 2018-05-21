@@ -50,7 +50,13 @@ app.get("/findByIP/:ip", (req, res) => {
 		return new Promise((resolve, reject) => {
 			try {
 				let someObj = {};
-				Logs.find({ ip }).then(result => resolve(result));
+				Logs.find({ ip }).then(result => {
+					if(result && !_.isEmpty(result)){
+						resolve(result);
+					}else{
+						reject('empty response');
+					}
+				});
 			} catch (e) {
 				console.log(e);
 				reject(e);
@@ -293,3 +299,5 @@ app.get("/findByDates/:date", (req, res) => {
 app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });
+
+module.exports = { app };
