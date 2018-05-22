@@ -64,7 +64,7 @@ class DailyChart extends Chart_Prototype {
 	get_daily() {
 		$.ajax({
 			type: "GET",
-			url:`https://calm-anchorage-32075.herokuapp.com/findByDate/${this.today}/${this.category}`,
+			url:`https://sitelogs.herokuapp.com/findByDate/${this.today}/${this.category}`,
 			// url: `http://localhost:3000/findByDate/${this.today}/${this.category}`,
 			success: function(response, textStatus, jqXHR) {
 				if (jqXHR.status === 204) {
@@ -92,7 +92,7 @@ class DailyChart extends Chart_Prototype {
 	backup_daily() {
 		$.ajax({
 			type: "GET",
-			url:`https://calm-anchorage-32075.herokuapp.com/findByDate/${this.yesterday}/${this.category}`,
+			url:`https://sitelogs.herokuapp.com/findByDate/${this.yesterday}/${this.category}`,
 			// url: `http://localhost:3000/findByDate/${this.yesterday}/${this.category}`,
 			success: function(response, textStatus, jqXHR) {
 				if (jqXHR.status === 204) {
@@ -158,7 +158,7 @@ class WeeklyChart extends Chart_Prototype {
 	get_weekly() {
 		$.ajax({
 			type: "GET",
-			url:`https://calm-anchorage-32075.herokuapp.com/findByDates/${this.week_ago}&${this.today}`,
+			url:`https://sitelogs.herokuapp.com/findByDates/${this.week_ago}&${this.today}`,
 			// url: `http://localhost:3000/findByDates/${this.week_ago}&${this.today}`,
 			success: function(response) {
 				var i = 0;
