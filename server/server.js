@@ -19,40 +19,8 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
-
-
-// app.configure('production', () => {
-// 	app.use((req, res, next) => {
-// 	  if (req.header('x-forwarded-proto') !== 'https'){
-// 		res.redirect(`https://${req.header('host')}${req.url}`)
-// 	  }
-// 	  else{
-// 		next();
-// 	  }
-// 	})
-//   })
-// app.use((req, res, next) => {
-//   if ( process.env.NODE_ENV === 'production' && req.header('x-forwarded-proto') !== 'https'
-//   ) {
-//     res.redirect(`https://${req.header('host')}${req.url}`);
-//   } else {
-//     next();
-//   }
-// });
-
 app.use(function(req, res, next) {
-  // console.log(`https://${req.header('host')}${req.url}`);
-  // var allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000', `http://127.0.0.1:${port}`, `http://localhost:${port}`];
-  // var origin = req.headers.origin;
-  // if(allowedOrigins.indexOf(origin) > -1){
-  // 	 res.setHeader('Access-Control-Allow-Origin', origin);
-  // }
-//   if(process.env.NODE_ENV === "production"){
-// 	res.setHeader('Access-Control-Allow-Origin', 'http://sitelogs.herokuapp.com');
-//   }
-//   else{
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   }
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -148,7 +116,7 @@ app.get('/findByDate/:date/:category', (req, res) => {
     Promise.all(promise)
       .then(response => {
         array_of_date.forEach((value, index) => {
-          resObj[value] = {}; //initialize keys
+          resObj[value] = {};
           response[index].forEach(docObj => {
             var category_value = docObj[category];
             if (!_.hasIn(resObj[value], category_value)) {
@@ -187,7 +155,6 @@ app.get('/findByDate/:date', (req, res) => {
           }).then(result => {
             if (_.isEmpty(result)) {
               res.status(204).send('no content');
-              // reject('no logs for this date')
             } else {
               resolve(result);
             }
@@ -266,7 +233,6 @@ app.get('/findByDates/:date/:category', (req, res) => {
               }
               resObj[key][category_value].push(docObj);
             });
-            // resObj[key] = value;
           }
         });
         res.send(resObj);

@@ -36,9 +36,9 @@ class Chart_Prototype {
 class DailyChart extends Chart_Prototype {
 	constructor() {
 		super();
-		this.today = moment().format("YYYY-MM-D");
-		this.yesterday = moment()
-			.add(-1, "days")
+		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-D");
+		this.yesterday = moment(today)
+			.subtract(1, "days")
 			.format("YYYY-MM-D");
 		this.categories = ["ip", "status"];
 		this.increment = 0;
@@ -147,7 +147,7 @@ class DailyChart extends Chart_Prototype {
 class WeeklyChart extends Chart_Prototype {
 	constructor() {
 		super();
-		this.today = moment().format("YYYY-MM-D");
+		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-D");
 		this.week_ago = moment(this.today)
 			.add(-7, "days")
 			.format("YYYY-MM-D");
