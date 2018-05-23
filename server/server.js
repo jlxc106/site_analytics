@@ -15,7 +15,7 @@ const chartPath = path.join(__dirname, '../node_modules/chart.js/dist');
 var port = process.env.PORT || 3000;
 const app = express();
 
-app.use(enforce.HTTPS());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
