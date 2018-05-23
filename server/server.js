@@ -4,8 +4,8 @@ const moment = require('moment');
 const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
-var enforce = require('express-sslify');
-
+const enforce = require('express-sslify');
+const cors = require('cors')
 //local files
 var { mongoose } = require('./db/mongoose');
 var { Logs } = require('./../models/logs');
@@ -15,12 +15,25 @@ const chartPath = path.join(__dirname, '../node_modules/chart.js/dist');
 var port = process.env.PORT || 3000;
 const app = express();
 
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+const whitelist = ['https://localhost:3000', 'https://www.jayclim.com'];
+const corsOptions = {
+	origin: function(origin, callback){
+		if(whitelist.indexOf(origin) !== -1){
+			callback(null, true);
+		}else{
+			callback(new Error('Not allowed by CORS'));	
+		}
+	}
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
 app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -43,7 +56,7 @@ app.use((req, res, next) => {
 });
 
 //get all logs by ip address, for multiple requests: separate by &
-app.get('/findByIP/:ip', (req, res) => {
+app.get('/findByIP/:ip', cors(corsOptions), (req, res) => {
   const ip_raw = req.params.ip.trim();
   const array_of_ip = ip_raw.split('&');
   let resObj = {};
@@ -77,7 +90,7 @@ app.get('/findByIP/:ip', (req, res) => {
 });
 
 //organize results from date by ip/network status
-app.get('/findByDate/:date/:category', (req, res) => {
+app.get('/findByDate/:date/:category',  cors(corsOptions), (req, res) => {
   const date_raw = req.params.date.trim();
   const category = req.params.category.trim();
   const array_of_date = date_raw.split('&');
@@ -132,7 +145,7 @@ app.get('/findByDate/:date/:category', (req, res) => {
 });
 
 //get all logs by date
-app.get('/findByDate/:date', (req, res) => {
+app.get('/findByDate/:date',  cors(corsOptions), (req, res) => {
   const date_raw = req.params.date.trim();
   const array_of_date = date_raw.split('&');
   if (
@@ -177,7 +190,7 @@ app.get('/findByDate/:date', (req, res) => {
   }
 });
 
-app.get('/findByDates/:date/:category', (req, res) => {
+app.get('/findByDates/:date/:category',  cors(corsOptions), (req, res) => {
   const date_raw = req.params.date.trim();
   const category = req.params.category.trim();
 
@@ -242,7 +255,7 @@ app.get('/findByDates/:date/:category', (req, res) => {
 });
 
 //get all logs between any two start and end dates
-app.get('/findByDates/:date', (req, res) => {
+app.get('/findByDates/:date',  cors(corsOptions), (req, res) => {
   const date_raw = req.params.date.trim();
   const array_date = date_raw.split('&');
   if (
