@@ -15,7 +15,7 @@ const chartPath = path.join(__dirname, '../node_modules/chart.js/dist');
 var port = process.env.PORT || 3000;
 const app = express();
 
-const whitelist = ['https://localhost:3000', 'https://www.jayclim.com'];
+const whitelist = ['https://localhost:3000', 'http://sitelogs.herokuapp.com/' ,'https://sitelogs.herokuapp.com/', 'https://www.jayclim.com'];
 const corsOptions = {
 	origin: function(origin, callback){
 		if(whitelist.indexOf(origin) !== -1){
