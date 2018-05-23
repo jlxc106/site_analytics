@@ -149,7 +149,7 @@ class WeeklyChart extends Chart_Prototype {
 		super();
 		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-D");
 		this.week_ago = moment(this.today)
-			.add(-7, "days")
+			.subtract(6, "days")
 			.format("YYYY-MM-D");
 		this.get_weekly = this.get_weekly.bind(this);
 		this.get_weekly();
