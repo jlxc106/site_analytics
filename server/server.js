@@ -18,7 +18,13 @@ app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
 app.use(function(req, res, next) {
-	res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+	console.log('oink: ', req.headers);
+	var allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000', `http://127.0.0.1:${port}`, `http://localhost:${port}`];
+	var origin = req.headers.origin;
+	if(allowedOrigins.indexOf(origin) > -1){
+		 res.setHeader('Access-Control-Allow-Origin', origin);
+	}
+	// res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 	res.setHeader("Access-Control-Allow-Methods", "GET");
 	res.setHeader(
 		"Access-Control-Allow-Headers",
