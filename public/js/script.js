@@ -37,7 +37,7 @@ class DailyChart extends Chart_Prototype {
 	constructor() {
 		super();
 		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-D");
-		this.yesterday = moment(today)
+		this.yesterday = moment(this.today)
 			.subtract(1, "days")
 			.format("YYYY-MM-D");
 		this.categories = ["ip", "status"];
