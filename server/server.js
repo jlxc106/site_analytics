@@ -4,7 +4,7 @@ const moment = require('moment');
 const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
-var sslRedirect = require('heroku-ssl-redirect');
+var enforce = require('express-sslify');
 
 //local files
 var { mongoose } = require('./db/mongoose');
@@ -18,7 +18,7 @@ const app = express();
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
-app.use(sslRedirect());
+app.use(enforce.HTTPS());
 
 
 // app.configure('production', () => {
@@ -47,7 +47,12 @@ app.use(function(req, res, next) {
   // if(allowedOrigins.indexOf(origin) > -1){
   // 	 res.setHeader('Access-Control-Allow-Origin', origin);
   // }
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   if(process.env.NODE_ENV === "production"){
+// 	res.setHeader('Access-Control-Allow-Origin', 'http://sitelogs.herokuapp.com');
+//   }
+//   else{
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   }
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader(
     'Access-Control-Allow-Headers',

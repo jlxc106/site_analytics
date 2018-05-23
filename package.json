@@ -18,7 +18,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
     "express": "^4.16.3",
-    "heroku-ssl-redirect": "0.0.4",
+    "express-sslify": "^1.2.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "mongodb": "^3.1.0-beta4",
