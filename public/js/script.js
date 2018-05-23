@@ -225,7 +225,6 @@ $("#daily-chart-wrapper li").click(function() {
 	$(this)
 		.removeClass("inactive")
 		.addClass("active");
-	console.log("change category");
 	daily.removeChart();
 	daily.change_category();
 });
