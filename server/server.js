@@ -5,7 +5,6 @@ const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
 const enforce = require('express-sslify');
-const cors = require('cors')
 //local files
 var { mongoose } = require('./db/mongoose');
 var { Logs } = require('./../models/logs');
@@ -15,24 +14,12 @@ const chartPath = path.join(__dirname, '../node_modules/chart.js/dist');
 var port = process.env.PORT || 3000;
 const app = express();
 
-const whitelist = ['https://localhost:3000', 'http://sitelogs.herokuapp.com/' ,'https://sitelogs.herokuapp.com/', 'https://www.jayclim.com'];
-const corsOptions = {
-	origin: function(origin, callback){
-		if(whitelist.indexOf(origin) !== -1){
-			callback(null, true);
-		}else{
-			callback(new Error('Not allowed by CORS'));	
-		}
-	}
-}
 
 if (process.env.NODE_ENV === 'production') {
   app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
-
-app.use(cors(corsOptions));
 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -44,8 +31,6 @@ app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
-
-
 
 
 app.use((req, res, next) => {
