@@ -4,6 +4,7 @@ const moment = require('moment');
 const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
+var sslRedirect = require('heroku-ssl-redirect');
 
 //local files
 var { mongoose } = require('./db/mongoose');
@@ -17,6 +18,9 @@ const app = express();
 app.use(express.static(publicPath));
 app.use(express.static(chartPath));
 
+app.use(sslRedirect());
+
+
 // app.configure('production', () => {
 // 	app.use((req, res, next) => {
 // 	  if (req.header('x-forwarded-proto') !== 'https'){
@@ -27,14 +31,14 @@ app.use(express.static(chartPath));
 // 	  }
 // 	})
 //   })
-app.use((req, res, next) => {
-  if ( process.env.NODE_ENV === 'production' && req.header('x-forwarded-proto') !== 'https'
-  ) {
-    res.redirect(`https://${req.header('host')}${req.url}`);
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if ( process.env.NODE_ENV === 'production' && req.header('x-forwarded-proto') !== 'https'
+//   ) {
+//     res.redirect(`https://${req.header('host')}${req.url}`);
+//   } else {
+//     next();
+//   }
+// });
 
 app.use(function(req, res, next) {
   // console.log(`https://${req.header('host')}${req.url}`);
