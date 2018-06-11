@@ -8,7 +8,7 @@ const { formatData } = require("./utils/formatData");
 const currentDate = moment()
 	.add(1, "days")
 	.add(-5, 'hours')
-	.format("YYYY-MM-D");
+	.format("YYYY-MM-DD");
 
 var counter = 0;
 

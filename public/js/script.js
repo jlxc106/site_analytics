@@ -36,10 +36,10 @@ class Chart_Prototype {
 class DailyChart extends Chart_Prototype {
 	constructor() {
 		super();
-		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-D");
+		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-DD");
 		this.yesterday = moment(this.today)
 			.subtract(1, "days")
-			.format("YYYY-MM-D");
+			.format("YYYY-MM-DD");
 		this.categories = ["ip", "status"];
 		this.increment = 0;
 		this.category = this.categories[this.increment % 2];
@@ -147,10 +147,10 @@ class DailyChart extends Chart_Prototype {
 class WeeklyChart extends Chart_Prototype {
 	constructor() {
 		super();
-		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-D");
+		this.today = moment.utc().subtract(1, 'day').subtract(30, 'minutes').format("YYYY-MM-DD");
 		this.week_ago = moment(this.today)
 			.subtract(6, "days")
-			.format("YYYY-MM-D");
+			.format("YYYY-MM-DD");
 		this.get_weekly = this.get_weekly.bind(this);
 		this.get_weekly();
 	}
@@ -235,7 +235,7 @@ function drawTable(data) {
         combine_data = combine_data.concat(data[data_from_day]);
     }
     combine_data.forEach((document_data, index)=>{
-        document_data['access date'] = moment(document_data['access date']).format("YYYY-MM-D HH:mm:ss A");
+        document_data['access date'] = moment(document_data['access date']).format("YYYY-MM-DD HH:mm:ss A");
     })
 	$("#myTable").DataTable({
 		data: combine_data,
