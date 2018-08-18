@@ -5,57 +5,81 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 <!--<![endif]-->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Site Logs | jayclim.com</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="Chart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/r-2.2.1/datatables.min.css"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize/css/materialize.min.css" media="screen,projection" />
     <script src="js/moment.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
-<body id="bg-img-container">
-    <header>Site Logs for Website:
-        <a href="https://www.jayclim.com" target="_blank">jayclim.com</a>
-    </header>
-    <div class="nav-container">
-        <ul class="nav nav-pills">
-            <li class="active">
-                <a href="#chart">Charts</a>
-            </li>
-            <li>
-                <a href="#table">Tables</a>
-            </li>
-        </ul>
-    </div>
+<body id="bg-img-container" class="">
+    <nav class="navbar-fixed">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Apache Logs on the web</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="#chart">Weekly Chart</a>
+                </li>
+                <li>
+                    <a href="#daily-chart-wrapper">Daily Chart</a>
+                </li>
+                <li>
+                    <a href="#table">Tables</a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.jayclim.com">Portfolio</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li>
+            <a href="#chart">Weekly Chart</a>
+        </li>
+        <li>
+            <a href="#daily-chart-wrapper">Daily Chart</a>
+        </li>
+        <li>
+            <a href="#table">Tables</a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.jayclim.com">Portfolio</a>
+        </li>
+    </ul>
     <div id="chart" class="container">
         <div class="weekly-chart-container chart-container">
-            <h1>Weekly Requests</h1>
+            <blockquote>Weekly Requests</blockquote>
             <div>
                 <canvas id="weekly_chart" width="400" height="400"></canvas>
             </div>
         </div>
         <div id="daily-chart-wrapper" class="daily-chart-container chart-container">
-            <h1 id="daily-chart-title">Daily Requests</h1>
-            <ul class="nav nav-pills">
+            <blockquote id="daily-chart-title">Daily Requests</blockquote>
+            <ul class="pagination">
                 <li class="active">
-                    <a href="#daily-chart-wrapper">IP</a>
+                    <a class="waves-effect waves-light">IP</a>
                 </li>
                 <li class="inactive">
-                    <a href="#daily-chart-wrapper">Status</a>
+                    <a class="waves-effect waves-light">Status</a>
                 </li>
             </ul>
             <div>
@@ -64,8 +88,8 @@
         </div>
     </div>
     <div id="table" class="container table-container">
-        <h1>Table - Last 7 Days</h1>
-        <table id="myTable" style="width: 80%">
+        <blockquote>Table - Last 7 Days</blockquote>
+        <table class="centered highlight striped" id="weeklyTable">
             <thead>
                 <tr>
                     <th>Access Date</th>
@@ -73,10 +97,11 @@
                     <th>request</th>
                     <th>status</th>
                     <th>size</th>
-                    <th>referrer</th>
-                    <th>user agent</th>
+                    <!-- <th>referrer</th>
+                    <th>user agent</th> -->
                 </tr>
             </thead>
+            <tbody></tbody>
             <tfoot>
                 <tr>
                     <th>Access Date</th>
@@ -84,12 +109,14 @@
                     <th>request</th>
                     <th>status</th>
                     <th>size</th>
-                    <th>referrer</th>
-                    <th>user agent</th>
+                    <!-- <th>referrer</th>
+                    <th>user agent</th> -->
                 </tr>
             </tfoot>
         </table>
+        <ul id="table-pagination" class="pagination"></ul>
     </div>
+    <script type="text/javascript" src="css/materialize/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
     <script src="js/script.js"></script>
 </body>

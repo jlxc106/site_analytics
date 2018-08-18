@@ -3,12 +3,12 @@ body{
 }
 
 #bg-img-container{
-    background: url("./img/simple-blue-background-43921-45008-hd-wallpapers.jpg");
+    background-image: linear-gradient(to bottom right, #90CAF9,#0d47a1,#b388ff, #82b1ff );
 }
 
 #chart, #table{
     background:transparent;
-    margin: 50px auto 50px;
+    margin: 80px auto 50px;
 }
 
 header{
@@ -39,8 +39,16 @@ header{
     width: 49%;
 }
 
+.pagination li{
+    height: inherit ;
+    margin: 0 5px 0 5px;
+}
+
+#daily-chart-wrapper li.active{
+    background-color: #00bfa5;
+}
+
 li{
-    font-size: 1.5em;
     background: white;
 }
 
@@ -48,11 +56,6 @@ li{
     width: 100vw;
     height: 100vh;
 }
-
-
-/* .daily-chart-container{
-    background: white;
-} */
 
 .chart-container{
     background: white;
@@ -67,10 +70,7 @@ li{
 }
 
 #table{
-    /* word-break: break-all; */
     overflow-wrap: break-word;
-    /* background-color: green; */
-    /* height: 50vh; */
     height: 100%;
     background: beige;
     padding-top: 60px;
@@ -79,4 +79,17 @@ li{
 td{
     min-width: 70px;
     max-width: 12vw;
+}
+.nav-wrapper li{
+    background: inherit;
+}
+
+.nav-fixed{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100vw;
+}
+#nav-mobile{
+    margin-right: 10px;
 }

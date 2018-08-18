@@ -6,10 +6,12 @@ var { mongoose } = require("./db/mongoose");
 const { formatData } = require("./utils/formatData");
 
 const currentDate = moment()
-	.add(1, "days")
+	.add(-9, "days")
 	.add(-5, 'hours')
 	.format("YYYY-MM-DD");
 
+// from -1 days to -9
+	console.log(currentDate);
 var counter = 0;
 
 axios
