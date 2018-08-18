@@ -84,12 +84,6 @@ td{
     background: inherit;
 }
 
-.nav-fixed{
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    width: 100vw;
-}
 #nav-mobile{
     margin-right: 10px;
 }
